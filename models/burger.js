@@ -1,19 +1,20 @@
-var orm = require("../config/orm");
+var orm = require("../config/orm.js");
 
 var burger = {
-    all: function (callback) {
+    all: function (cb) {
         orm.selectAll("burger", function (res) {
-            callback(res);
+            console.log(res)
+            cb(res);
         })
     },
-    add: function (callback) {
+    add: function (name, cb) {
         orm.insertOne("burger", function (res) {
-            callback(res)
+            cb(res)
         })
     },
-    update: function (callback) {
+    update: function (devour, cb) {
         orm.updateOne("burger", function (res) {
-            callback(res);
+            cb(res);
         })
     }
 }

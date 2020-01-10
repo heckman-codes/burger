@@ -1,26 +1,32 @@
-var connection = require("../config/connection");
+var connection = require("../config/connection.js");
+
+var tableName = "burger"
 
 var orm = {
-    selectAll: function () {
-        var queryString = "SELECT * FROM burger";
+    selectAll: function (tableName, cb) {
+        var queryString = "SELECT * FROM " + tableName + ";";
         connection.query(queryString, function (err, result) {
             if (err) throw err;
-            console.log(result);
+            // console.log(result);
+            cb(result);
         });
+
     },
-    insertOne: function (burgerName) {
+    insertOne: function (burgerName, cb) {
         var queryString = "INSERT INTO burger (burger)";
         connection.query(queryString, [burgerName], function (err, result) {
             if (err) throw err;
             console.log(result);
         });
+        cb(result);
     },
-    updateOne: function (updatedValue) {
+    updateOne: function (updatedValue, cb) {
         var queryString = "UPDATE burger SET burger WHERE ?";
         connection.query(queryString, [updatedValue], function (err, result) {
             if (err) throw err;
             console.log(result);
         })
+        cb(result);
     }
 }
 

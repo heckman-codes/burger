@@ -4,24 +4,21 @@ var router = express.Router();
 
 router.get("/", function (req, res) {
     burger.all(function (data) {
-        var burgerObj = {
-            burger: data
-        };
-        console.log(burgerObj);
-        res.render("index", burgerObj);
+        // var burgerObj = {
+        //     burger: data
+        // };
+        // console.log(data);
+        res.render("index", { burgers: data });
     });
 });
 
-router.post("/", function (req, res) {
+router.post("/api/post", function (req, res) {
     burger.add(["burger"], [req.body.name], function (data) {
-        var burgerObj = {
-            burger: data
-        }
-        res.json({ id: result.insertId });
+        res.json({ id: data });
     })
 });
 
-router.put("/", function (req, res) {
+router.put("/api/:id", function (req, res) {
 
     var condition = "id = " + req.params.id;
 
@@ -29,10 +26,12 @@ router.put("/", function (req, res) {
         {
             devour: req.body.devour
         },
+        condition,
         function (data) {
             var burgerObj = {
                 burger: data
             }
+            res.status(200).end();
         })
 })
 
