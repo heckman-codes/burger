@@ -2,7 +2,7 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 var routes = require("./controllers/burger_controllers");
 var app = express();
-var PORT = process.env.PORT || 0005
+var PORT = process.env.PORT || 0006
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

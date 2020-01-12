@@ -2,6 +2,16 @@ var connection = require("../config/connection.js");
 
 var tableName = "burger"
 
+function printQuestionMarks(num) {
+    var arr = [];
+
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+
+    return arr.toString();
+}
+
 var orm = {
     selectAll: function (tableName, cb) {
         var queryString = "SELECT * FROM " + tableName + ";";
@@ -12,21 +22,36 @@ var orm = {
         });
 
     },
-    insertOne: function (burgerName, cb) {
-        var queryString = "INSERT INTO burger (burger)";
-        connection.query(queryString, [burgerName], function (err, result) {
-            if (err) throw err;
-            console.log(result);
+    insertOne: function (table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table + " (" + cols.toString() + ")" + " VALUES (" + printQuestionMarks(vals.length) + ")";
+
+        console.log(queryString);
+
+        connection.query(queryString, vals, function (err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
         });
-        cb(result);
+
     },
-    updateOne: function (updatedValue, cb) {
-        var queryString = "UPDATE burger SET burger WHERE ?";
-        connection.query(queryString, [updatedValue], function (err, result) {
+    updateOne: function (updatedValue, condition, cb) {
+        var queryString = "UPDATE burger SET ? WHERE id = ? ";
+        connection.query(queryString, [updatedValue, condition], function (err, result) {
             if (err) throw err;
             console.log(result);
+            cb(result);
         })
-        cb(result);
+
+    },
+    deleteOne: function (updatedValue, condition, cb) {
+        var queryString = "UPDATE burger DELETE ? WHERE id = ? ";
+        connection.query(queryString, [updatedValue, condition], function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            cb(result);
+        })
+
     }
 }
 
