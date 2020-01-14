@@ -4,12 +4,20 @@ var router = express.Router();
 
 router.get("/", function (req, res) {
     burger.all(function (data) {
-        // var burgerObj = {
-        //     burger: data
-        // };
-        // console.log(data);
-        res.render("index", { burgers: data });
+        const dburg = data.filter(x => x.devour === 1);
+        const notdburg = data.filter(x => x.devour === 0);
+        console.log(dburg);
+        console.log(notdburg);
+        res.render("index", {
+            burgers: notdburg,
+            devouredBurgers: dburg
+        });
+
     });
+    // burger.devoured(function (data) {
+    //     res.render("index", { devouredBurgers: data });
+
+    // });
 });
 
 router.post("/api/burger", function (req, res) {
@@ -36,8 +44,9 @@ router.put("/api/burger/:id", function (req, res) {
         })
 })
 
-router.delete("api/burger/:id", function (req, res) {
-    burger.deleteOne(req.params.id, function (result) {
+router.delete("api/burger/delete/:id", function (req, res) {
+    console.log("Req params ID: " + req.params.id)
+    burger.delete(req.params.id, function (result) {
         res.redirect("/");
     });
 });

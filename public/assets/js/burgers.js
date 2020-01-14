@@ -1,25 +1,4 @@
 $(function () {
-    // $(".devour").on("click", function (event) {
-    //     var id = $(this).data("id");
-    //     var devour = $(this).data("devour");
-
-    //     var devouredState = {
-    //         devour: 1
-    //     };
-
-    //     // Send the PUT request.
-    //     $.ajax("/api/burger/" + id, {
-    //         type: "PUT",
-    //         data: devouredState
-    //     }).then(
-    //         function () {
-    //             console.log("Successfully devoured ", devour);
-    //             // Reload the page to get the updated list
-    //             location.reload();
-    //         }
-    //     );
-    // });
-
     $(".devour").on("click", function (event) {
         var id = $(this).data("id");
         var devour = $(this).data("devour");
@@ -30,8 +9,33 @@ $(function () {
 
         // Send the PUT request.
         $.ajax("/api/burger/" + id, {
-            type: "DELETE",
+            type: "PUT",
             data: devouredState
+        }).then(
+            function () {
+                console.log("Successfully devoured ", devour);
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+
+    $(".devour").on("click", function (event) {
+        event.preventDefault();
+        var id = $(this).data("id");
+        var devour = $(this).data("devour");
+
+        var idNumber = {
+            id,
+            // devour: 1
+        };
+
+        console.log(idNumber);
+
+        $.ajax("/api/burger/delete/" + id, {
+            type: "POST",
+            url: "/api/burger/delete/" + id,
+            data: idNumber
         }).then(
             function () {
                 console.log("Successfully devoured ", devour);

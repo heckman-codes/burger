@@ -22,6 +22,14 @@ var orm = {
         });
 
     },
+    devouredBurgers: function (tableName, cb) {
+        var queryString = "SELECT * FROM " + tableName + " WHERE devour = 1;";
+        connection.query(queryString, function (err, result) {
+            if (err) throw err;
+            cb(result);
+        });
+
+    },
     insertOne: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table + " (" + cols.toString() + ")" + " VALUES (" + printQuestionMarks(vals.length) + ")";
 
@@ -44,9 +52,10 @@ var orm = {
         })
 
     },
-    deleteOne: function (updatedValue, condition, cb) {
-        var queryString = "UPDATE burger DELETE ? WHERE id = ? ";
-        connection.query(queryString, [updatedValue, condition], function (err, result) {
+    deleteOne: function (updatedValue, cb) {
+        console.log("INCOMING ID: " + updatedValue);
+        var queryString = "DELETE FROM burger WHERE id = ? ";
+        connection.query(queryString, [updatedValue], function (err, result) {
             if (err) throw err;
             console.log(result);
             cb(result);
