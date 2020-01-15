@@ -6,20 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {{!-- <link rel="stylesheet" href="../public/css/burger_style.css"> --}}
+    <link rel="stylesheet" href="assets/css/burger_style.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <title>Eat Da Burger!</title>
 </head>
 
 <body>
     <div class="container">
-        <img src="/assets/img/burgerjump.gif" alt="Eat Da Burger" height="300" width="300">
-        <h1>Eat Da Burger</h1>
-        <h2>Add a Burger!</h2>
-        <form>
-            <input placeholder="Type a burger name!" id="burger-input" name="burger"></input>
-            <button type="submit" class="submit" name="submit">Submit</button>
-        </form>
+        <div class="row">
+            <img src="/assets/img/burgerjump.gif" alt="Eat Da Burger" height="200" width="200">
+            <div id="title-form">
+                <h1 id="title">Eat Da Burger</h1>
+                <h5>Add a Burger!</h5>
+                <form>
+                    <input placeholder="Type a burger name!" id="burger-input" name="burger"></input>
+                    <button type="submit" class="submit" name="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <br>
         {{{ body }}}
     </div>
 

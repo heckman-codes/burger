@@ -20,14 +20,13 @@ $(function () {
         );
     });
 
-    $(".devour").on("click", function (event) {
+    $(".delete").on("click", function (event) {
         event.preventDefault();
         var id = $(this).data("id");
         var devour = $(this).data("devour");
 
         var idNumber = {
             id,
-            // devour: 1
         };
 
         console.log(idNumber);
